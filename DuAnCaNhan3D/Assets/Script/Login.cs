@@ -26,6 +26,7 @@ public class Login : MonoBehaviour
                 Debug.Log("Đăng nhập user cũ: " + inputName);
             }
 
+    
             // Ghi nhớ user đang login
             PlayerCtrl.currentUser = inputName;
 

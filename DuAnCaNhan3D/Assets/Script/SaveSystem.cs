@@ -47,6 +47,7 @@ public static class SaveSystem
         }
 
         SaveDatabase(db);
+        Debug.Log(path);
     }
 
     // Load dữ liệu theo username
