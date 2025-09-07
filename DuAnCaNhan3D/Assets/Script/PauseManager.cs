@@ -35,6 +35,7 @@ public class PauseManager : MonoBehaviour
     }
     public void BackToMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
     public void ShowLeaderboard()
