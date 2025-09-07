@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OpenLeaderBoard : MonoBehaviour
@@ -8,7 +9,7 @@ public class OpenLeaderBoard : MonoBehaviour
     public GameObject leaderBoard;
     public TextMeshProUGUI leaderboardText; // Text trên UI để hiển thị
 
-    private void Start()
+    private void OnEnable ()
     {
         ShowLeaderboard();
     }
