@@ -2,10 +2,10 @@
 
 public class ItemCtrl : MonoBehaviour
 {
-    PlayerCtrl PlayerCtrl;
+    PlayerUI PlayerCtrl;
     void Start()
     {
-        PlayerCtrl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCtrl>();
+        PlayerCtrl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUI>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -16,7 +16,7 @@ public class ItemCtrl : MonoBehaviour
             PlayerCtrl.scoreInput.text = "Score: " + PlayerCtrl.score.ToString();
 
             // load dữ liệu user hiện tại từ JSON
-            UserData data = SaveSystem.Load(PlayerCtrl.currentUser);
+            UserData data = SaveSystem.Load(PlayerUI.currentUser);
             if (data != null)
             {
                 data.score = PlayerCtrl.score; // cập nhật điểm mới
