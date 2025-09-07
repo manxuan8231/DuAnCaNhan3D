@@ -11,8 +11,12 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 0;
     public float rotationSpeed = 0;
 
+    //animation
+    public Animator animator;
+
     void Start()
     {
+        animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
         EnableJoystickInput();
         
     }
@@ -31,10 +35,15 @@ public class PlayerMove : MonoBehaviour
             characterController.Move(moveDirection * moveSpeed);
             if(moveDirection.sqrMagnitude <= 0)
             {
+                animator.SetBool("Speed", false);
+                animator.SetTrigger("Idle");
                 return;
             }
-            var targetDirection = Vector3.RotateTowards(characterController.transform.forward, moveDirection, rotationSpeed * Time.deltaTime, 0.0f);
+            var targetDirection = Vector3.RotateTowards(characterController.transform.forward, moveDirection,
+                rotationSpeed * Time.deltaTime, 0.0f);
             characterController.transform.rotation = Quaternion.LookRotation(targetDirection);
+            animator.SetBool("Speed", true);
+
         }
     }
 }
