@@ -1,16 +1,23 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TelePortGate : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public string scenceName;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.tag == "Player")
+        {
+            UserData data = SaveSystem.Load(PlayerUI.currentUser);
+            if(data != null)
+            {
+                data.level++;
+                data.lastScence = scenceName;
+                SaveSystem.Save(data);
+            }
+            SceneManager.LoadScene(scenceName);
+
+        }
     }
 }

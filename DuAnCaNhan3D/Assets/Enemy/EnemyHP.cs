@@ -8,14 +8,17 @@ public class EnemyHP : MonoBehaviour
     public int hp = 1;
     public List<ItemDrop> dropItems;  // danh sách item có thể rớt
     public Transform dropPoint;
+    BoxCollider box;
     private void Start()
     {
         animator = GetComponent<Animator>();
+        box = GetComponent<BoxCollider>();
         
     }
     public void TakeDame()
     {
         hp--;
+        box.enabled = false;
         animator.SetTrigger("Death");
         Drop();
         Destroy(gameObject, 2f);
