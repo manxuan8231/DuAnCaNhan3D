@@ -12,7 +12,7 @@ public class ItemCtrl : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            PlayerCtrl.score += 5;
+            PlayerCtrl.score = Random.Range(0, 10);
             PlayerCtrl.scoreInput.text = "Score: " + PlayerCtrl.score.ToString();
 
             // load dữ liệu user hiện tại từ JSON

@@ -43,6 +43,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         Debug.Log("Tấn công enemy: " + enemy.name);
         // Xoay mặt về phía enemy
+        EnemyHP enemyHP  = GameObject.FindWithTag("Enemy").GetComponent<EnemyHP>();
         Vector3 direction = (enemy.transform.position - transform.position).normalized;
         direction.y = 0; // giữ player không bị ngẩng/nhìn xuống
         if (direction != Vector3.zero)
@@ -51,6 +52,7 @@ public class PlayerCtrl : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 80f);
         }
         playermove.animator.SetTrigger("isAttack");
+        enemyHP.TakeDame();
 
     }
 

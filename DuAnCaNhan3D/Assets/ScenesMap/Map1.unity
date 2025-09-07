@@ -11848,6 +11848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450652626002371}
   - component: {fileID: 5866666020835949497}
+  - component: {fileID: 5866666020835949498}
   - component: {fileID: 1487580052}
   m_Layer: 0
   m_Name: Enemy
@@ -11951,10 +11952,6 @@ PrefabInstance:
     - target: {fileID: 1542309487363384443, guid: 4c5f3cb769b96cd45a4b6471967bb553, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2005113579196618257, guid: 4c5f3cb769b96cd45a4b6471967bb553, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3801792950452091966, guid: 4c5f3cb769b96cd45a4b6471967bb553, type: 3}
       propertyPath: m_Name
@@ -13021,10 +13018,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item1
       objectReference: {fileID: 0}
-    - target: {fileID: 4012338811094261960, guid: 1eb06f6c3c251a04b80aa8746ff91686, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4133887483820699223, guid: 1eb06f6c3c251a04b80aa8746ff91686, type: 3}
       propertyPath: m_LocalPosition.x
       value: -53.3248
@@ -13266,6 +13259,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666020835949498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148081523577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e698979135d186743b2029acbf510813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 1
+  dropItems:
+  - dropChance: 100
+    itemPrefab: {fileID: 1104842991881018290, guid: 1eb06f6c3c251a04b80aa8746ff91686, type: 3}
+  dropPoint: {fileID: 543450652626002371}
 --- !u!4 &5953189308849987246 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6094255336544506598, guid: d5a260673f733a245ba846de01d93812, type: 3}
