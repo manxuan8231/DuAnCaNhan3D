@@ -1,43 +1,47 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;  // cho InputField, Button
 using UnityEngine.SceneManagement;
-using TMPro;
+using TMPro; 
 
 public class LoginManager : MonoBehaviour
 {
-    [Header("UI References")]
-    public TMP_InputField nameInput;   // drag InputField vào
-    public Button startButton;     // drag Button vào
+    public TMP_InputField usernameInput; // Ô nhập username
+    public TextMeshProUGUI messageText;  // Text hiển thị thông báo
 
-    public void OnStartClicked()
+    private void Start()
     {
-        string enteredName = nameInput.text.Trim().ToString();
+        messageText.text = "";
+    }
 
+    public void OnLoginButton()
+    {
+        string username = usernameInput.text.Trim();
 
-        if (string.IsNullOrEmpty(enteredName))
+        if (string.IsNullOrEmpty(username))
         {
-            Debug.LogWarning("Tên không được để trống!");
+            messageText.text = "Vui lòng nhập tên!";
             return;
         }
 
-        // kiểm tra user có tồn tại không
-        if (SaveSystem.UserExists(enteredName))
+        UserData user;
+
+        // Kiểm tra user đã có chưa
+        if (SaveSystem.UserExists(username))
         {
-            Debug.Log("Đã có user: " + enteredName);
-            UserData existing = SaveSystem.Load(enteredName);
-            Debug.Log($"Load thành công: Level {existing.level}, Score {existing.hightScore}");
+            user = SaveSystem.Load(username);
+            messageText.text = "Chào mừng trở lại, " + user.username + "!";
         }
         else
         {
-            Debug.Log("Tạo user mới: " + enteredName);
-            UserData newUser = new UserData(enteredName);
-            SaveSystem.Save(newUser);
+            // Tạo user mới
+            user = new UserData(username);
+            SaveSystem.Save(user);
+            messageText.text = "Tạo tài khoản mới thành công!";
         }
 
-        // chuyển sang scene game
-        GameSession.currentUserName = enteredName;
-        SceneManager.LoadScene("Map1");
-    }
-  
+        // Lưu user hiện tại vào GameManager (singleton)
+        GameManager.Instance.currentUser = user;
 
+        // Vào scene chơi game 
+        SceneManager.LoadScene(user.lastScene);
+    }
 }

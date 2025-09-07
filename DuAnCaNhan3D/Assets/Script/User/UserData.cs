@@ -1,15 +1,16 @@
-using UnityEngine;
-
-public class UserData : MonoBehaviour
-{ 
-    public string userName;
+﻿[System.Serializable]
+public class UserData
+{
+    public string username;
+    public int score;
     public int level;
-    public int hightScore;
+    public string lastScene; // lưu map cuối cùng của user
 
-    public UserData(string userName)
+    public UserData(string username)
     {
-        this.userName = userName;
-        level = 1;
-        hightScore = 0;
-    } 
+        this.username = username;
+        score = 0;
+        level = 0;
+        lastScene = "Map1"; 
+    }
 }

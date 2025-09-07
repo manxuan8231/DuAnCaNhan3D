@@ -3,34 +3,33 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    public TextMeshProUGUI userName;
-    public TextMeshProUGUI level;
-    public TextMeshProUGUI hightScore;
+  
 
-    private UserData currentUser;
-    
-    
-    void Start()
+
+   
+      public TextMeshProUGUI usernameText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI levelText;
+
+    private void Start()
     {
-        if (string.IsNullOrEmpty(GameSession.currentUserName))
-        {
-            Debug.LogError("Chưa có user đang đăng nhập!");
-            return;
-        }
-
-        currentUser = SaveSystem.Load(GameSession.currentUserName);
-
-        if (currentUser != null)
-        {
-            userName.text = $"Name: {currentUser.userName}";
-            level.text = $"Level: {currentUser.level}";
-            hightScore.text = $"HighScore: {currentUser.hightScore}";
-        }
-        else
-        {
-            Debug.LogError("Không tìm thấy user hiện tại: " + GameSession.currentUserName);
-        }
+        UpdateUI();
     }
 
-
+    // Hàm gọi để cập nhật UI khi dữ liệu thay đổi
+    public void UpdateUI()
+    {
+        if (GameManager.Instance != null && GameManager.Instance.currentUser != null)
+        {
+            UserData user = GameManager.Instance.currentUser;
+            usernameText.text = "Name: " + user.username;
+            scoreText.text = "Score: " + user.score;
+            levelText.text = "Level: " + user.level;
+        }
+    }
 }
+
+
+
+
+

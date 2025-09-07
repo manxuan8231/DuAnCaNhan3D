@@ -9,6 +9,9 @@ public class CharacterMove : MonoBehaviour
     public Canvas inputCanvas;
     public bool isjoyStick;
 
+    public float lastTimeAttack = -1f;
+    public float coldownAttack = 1f;
+
     public Animator animator; 
     private void Start()
     {       
@@ -37,5 +40,21 @@ public class CharacterMove : MonoBehaviour
             var targetDirection = Vector3.RotateTowards(controller.transform.forward, movementDirection, movementSpeed * Time.deltaTime, 0.0f);
             controller.transform.rotation = Quaternion.LookRotation(targetDirection);
         }
+
+
     }
+    public void Attack()
+    {
+       if(Time.time >= lastTimeAttack + coldownAttack)
+        {
+            animator.SetTrigger("attack");
+            lastTimeAttack = Time.time;
+        }
+           
+    }  
+    public void Jump()
+    {
+      animator.SetTrigger("jump");
+    }
+  
 }
