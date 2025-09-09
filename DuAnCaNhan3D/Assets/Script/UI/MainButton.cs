@@ -27,7 +27,7 @@ public class MainButton : MonoBehaviour
         {
             leaderboardUI.leaderBoard.SetActive(true);
             leaderboardUI. leaderboardText.text = "";
-            leaderboardUI.ShowLeaderboard();
+           
            
         }
 
