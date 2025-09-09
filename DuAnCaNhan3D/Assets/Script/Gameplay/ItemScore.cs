@@ -18,7 +18,7 @@ public class ItemScore : MonoBehaviour
         GameManager.Instance.SaveProgress(); // Lưu lại
 
         // Tìm HUD và cập nhật UI
-        FindObjectOfType<Status>().UpdateUI();
+        FindAnyObjectByType<Status>().UpdateUI();
     }
 
 }

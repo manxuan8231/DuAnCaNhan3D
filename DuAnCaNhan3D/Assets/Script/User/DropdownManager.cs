@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class DropdownManager : MonoBehaviour
 {
@@ -54,4 +55,8 @@ public class DropdownManager : MonoBehaviour
         GameManager.Instance.currentUser = allUsers[index];
         Debug.Log("Đã chọn user: " + GameManager.Instance.currentUser.username);
     }
+
+
+   
+
 }

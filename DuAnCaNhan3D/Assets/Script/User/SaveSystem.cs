@@ -69,4 +69,15 @@ public static class SaveSystem
         UserDatabase db = LoadDatabase();
         return db.users;
     }
+
+    // Xóa user
+    public static void DeleteUser(string username)
+    {
+        string filePath = path + username + ".json";
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+            Debug.Log("Đã xóa user file: " + filePath);
+        }
+    }
 }

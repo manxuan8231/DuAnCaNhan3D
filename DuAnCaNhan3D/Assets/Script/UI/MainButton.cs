@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class MainButton : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class MainButton : MonoBehaviour
         if (leaderboardUI != null)
         {
             leaderboardUI.leaderBoard.SetActive(true);
+            leaderboardUI. leaderboardText.text = "";
+            leaderboardUI.ShowLeaderboard();
+           
         }
 
     }
