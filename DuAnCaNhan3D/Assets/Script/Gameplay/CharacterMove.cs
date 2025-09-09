@@ -12,7 +12,8 @@ public class CharacterMove : MonoBehaviour
     public float lastTimeAttack = -1f;
     public float coldownAttack = 1f;
 
-    public Animator animator; 
+    public Animator animator;
+   
     private void Start()
     {       
         EnableJoyStickInput();     
@@ -54,7 +55,8 @@ public class CharacterMove : MonoBehaviour
     }  
     public void Jump()
     {
-      animator.SetTrigger("jump");
+       animator.SetTrigger("jump");
+       
     }
   
 }

@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class OpenLeaderBoard : MonoBehaviour
+public class LeaderboardUI : MonoBehaviour
 {
     public GameObject leaderBoard;
     public TextMeshProUGUI leaderboardText; // Text trên UI để hiển thị
@@ -19,21 +19,12 @@ public class OpenLeaderBoard : MonoBehaviour
         List<UserData> users = SaveSystem.GetAllUsers();
 
         // Sắp xếp theo highScore giảm dần
-        var top5 = users.OrderByDescending(u => u.score).Take(5).ToList();
-
-        leaderboardText.text = "      Top 5 Highscores \n\n";
+        var top5 = users.OrderByDescending(u => u.score).Take(15).ToList();
 
         for (int i = 0; i < top5.Count; i++)
-        {
-            leaderboardText.text += $"{i + 1}. {top5[i].username} - {top5[i].score}\n";
+        {         
+            leaderboardText.text += $"Top: {i + 1} - Name: {top5[i].username} - Score: {top5[i].score} - Level: {top5[i].level}\n";
         }
     }
-    public void OpenLeaderboard()
-    {
-        leaderBoard.SetActive(true);
-    }
-    public void CloseLeaderboard()
-    {
-        leaderBoard.SetActive(false);
-    }
+   
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro; 
 
 public class LoginManager : MonoBehaviour
@@ -12,7 +11,7 @@ public class LoginManager : MonoBehaviour
         messageText.text = "";
     }
 
-    public void OnLoginButton()
+    public void OnLoginButton()//dang ky tai khoản
     {
         string username = usernameInput.text.Trim();
 
@@ -42,6 +41,7 @@ public class LoginManager : MonoBehaviour
         GameManager.Instance.currentUser = user;
 
         // Vào scene chơi game 
-        SceneManager.LoadScene(user.lastScene);
+       // SceneManager.LoadScene(user.lastScene);
     }
+   
 }
