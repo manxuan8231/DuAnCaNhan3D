@@ -85,10 +85,10 @@ public class Login : MonoBehaviour
         bxhObj.SetActive(true);
         var top5 = allUsers.OrderByDescending(u => u.score).Take(5).ToList();
 
-        leaderboardText.text = "      Top 5 Highscores \n";
+        leaderboardText.text = "             Top 5 Highscores \n";
         for (int i = 0; i < top5.Count; i++)
         {
-            leaderboardText.text += $"{i + 1}. {top5[i].username} - Score: {top5[i].score} - Level: {top5[i].level}\n";
+            leaderboardText.text += $"{i + 1}.{top5[i].username} - Score: {top5[i].score} - Level: {top5[i].level}\n";
         }
     }
 
