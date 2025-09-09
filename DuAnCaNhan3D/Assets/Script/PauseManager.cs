@@ -9,10 +9,13 @@ public class PauseManager : MonoBehaviour
     public GameObject btn;       // Nút Resume / Menu
     public bool isPaused = false;
     public TMP_Text leaderboardText;
-
+    public GameObject panelBxh;
+    
     void Start()
     {
         btn.SetActive(false);
+        panelBxh.SetActive(false);
+
         Time.timeScale = 1; // đảm bảo lúc start game không bị dừng
     }
 
@@ -42,15 +45,21 @@ public class PauseManager : MonoBehaviour
     public void ShowLeaderboard()
     {
         List<UserData> users = SaveSystem.GetAllUsers();
+        panelBxh.SetActive(true);
 
         // Sắp xếp theo highScore giảm dần
-        var top5 = users.OrderByDescending(u => u.score).Take(10).ToList();
+        var top5 = users.OrderByDescending(u => u.score).Take(5).ToList();
+        
 
         leaderboardText.text = "      Top 10 Highscores \n\n";
 
         for (int i = 0; i < top5.Count; i++)
         {
-            leaderboardText.text += $"{i + 1}. {top5[i].username} - {top5[i].score}\n";
+            leaderboardText.text += $"{i + 1}. {top5[i].username} - Score: {top5[i].score} - Level: {top5[i].level}\n";
         }
+    }
+    public void HideLeaderboard()
+    {
+        panelBxh.SetActive(false);
     }
 }

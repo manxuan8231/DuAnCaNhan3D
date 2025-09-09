@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -10,13 +10,18 @@ public class PlayerMove : MonoBehaviour
     //speed player
     public float moveSpeed = 0;
     public float rotationSpeed = 0;
+ 
 
     //animation
     public Animator animator;
+    //tham chiếu
+    public PauseManager pauseManager;
+
 
     void Start()
     {
         animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+        pauseManager = GameObject.Find("Player/CanvasPlayer").GetComponent<PauseManager>();
         EnableJoystickInput();
         
     }
@@ -29,11 +34,16 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isJoystick)
+      MoveMentPlayer();
+    }
+
+    public void MoveMentPlayer()
+    {
+        if (isJoystick && !pauseManager.isPaused)
         {
             var moveDirection = new Vector3(joystick.Direction.x, 0.0f, joystick.Direction.y);
             characterController.Move(moveDirection * moveSpeed);
-            if(moveDirection.sqrMagnitude <= 0)
+            if (moveDirection.sqrMagnitude <= 0)
             {
                 animator.SetBool("Speed", false);
                 animator.SetTrigger("Idle");
@@ -45,5 +55,9 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("Speed", true);
 
         }
+    }
+    public void Jump()
+    {
+        animator.SetTrigger("jump");
     }
 }

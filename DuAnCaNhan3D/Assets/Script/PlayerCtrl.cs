@@ -25,35 +25,50 @@ public class PlayerCtrl : MonoBehaviour
     void DetectAndAttack()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+        GameObject nearestEnemy = null;
+        float shortestDistance = Mathf.Infinity;
 
         foreach (Collider hit in hits)
         {
             if (enemyTags.Contains(hit.tag)) // kiểm tra có tag enemy không
             {
-                if (attackTimer <= 0f)
+                float distance = Vector3.Distance(transform.position, hit.transform.position);
+                if (distance < shortestDistance)
                 {
-                    AttackEnemy(hit.gameObject);
-                    attackTimer = attackCooldown;
+                    shortestDistance = distance;
+                    nearestEnemy = hit.gameObject;
                 }
             }
+        }
+
+        // nếu có enemy gần nhất thì tấn công
+        if (nearestEnemy != null && attackTimer <= 0f)
+        {
+            AttackEnemy(nearestEnemy);
+            attackTimer = attackCooldown;
         }
     }
 
     void AttackEnemy(GameObject enemy)
     {
         Debug.Log("Tấn công enemy: " + enemy.name);
+
+        // Lấy script EnemyHP của chính enemy bị đánh
+        EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
+
         // Xoay mặt về phía enemy
-        EnemyHP enemyHP  = GameObject.FindWithTag("Enemy").GetComponent<EnemyHP>();
         Vector3 direction = (enemy.transform.position - transform.position).normalized;
-        direction.y = 0; // giữ player không bị ngẩng/nhìn xuống
+        direction.y = 0;
         if (direction != Vector3.zero)
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 80f);
         }
-        playermove.animator.SetTrigger("isAttack");
-        enemyHP.TakeDame();
 
+        playermove.animator.SetTrigger("isAttack");
+
+        if (enemyHP != null)
+            enemyHP.TakeDame();
     }
 
     // Vẽ phạm vi radius trong Scene cho dễ debug
