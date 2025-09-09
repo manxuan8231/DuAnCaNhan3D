@@ -6,9 +6,7 @@ public class PlayerUI : MonoBehaviour
     public TMP_Text scoreInput;
     public TMP_Text levelInput;
     public int score = 0;
-
     public static string currentUser; // user hiện tại
-
     void Start()
     {
         if (!string.IsNullOrEmpty(currentUser))
