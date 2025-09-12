@@ -73,11 +73,20 @@ public static class SaveSystem
     // Xóa user
     public static void DeleteUser(string username)
     {
-        string filePath = path + username + ".json";
-        if (File.Exists(filePath))
+        UserDatabase db = LoadDatabase();
+
+        // tìm user
+        UserData target = db.users.Find(u => u.username == username);
+        if (target != null)
         {
-            File.Delete(filePath);
-            Debug.Log("Đã xóa user file: " + filePath);
+            db.users.Remove(target);
+            SaveDatabase(db); // Quan trọng: ghi lại file users.json
+            Debug.Log("Đã xóa user: " + username);
+        }
+        else
+        {
+            Debug.LogWarning("Không tìm thấy user để xóa: " + username);
         }
     }
+
 }

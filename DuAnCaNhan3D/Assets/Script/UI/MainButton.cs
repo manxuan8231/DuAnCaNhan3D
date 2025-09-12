@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class MainButton : MonoBehaviour
 {
+    public GameObject panelUser;
+    public GameObject panelNewUser;
     public void OnStartButton()//bắt đầu chơi game
     {
         if (GameManager.Instance.currentUser != null)
@@ -46,5 +48,24 @@ public class MainButton : MonoBehaviour
     public void OnExitButton()
     {
         Application.Quit();
+    }
+
+    //mở đóng danh sách user 
+    public void OpenPanelUser()
+    {
+        panelUser.SetActive(true);
+    }
+    public void ClosePanelUser()
+    {
+        panelUser.SetActive(false);
+    }
+
+    //mở đóng bảng tạo user
+    public void OpenPanelNewUser()
+    {
+        panelNewUser.SetActive(true);
+    }
+    public void ClosePanelNewUser() { 
+        panelNewUser.SetActive(false);
     }
 }
