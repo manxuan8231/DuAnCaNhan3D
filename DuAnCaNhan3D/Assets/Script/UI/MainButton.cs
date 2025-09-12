@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainButton : MonoBehaviour
 {
+    public GameObject leaderBoard;           
     public GameObject panelUser;
     public GameObject panelNewUser;
+    public GameObject panelQuitGame; 
+    public GameObject panelSetting;
     public void OnStartButton()//bắt đầu chơi game
     {
         if (GameManager.Instance.currentUser != null)
@@ -23,27 +26,28 @@ public class MainButton : MonoBehaviour
     //mở bảng xếp hạng
     public void OpenLeaderboard()
     {
-        LeaderboardUI leaderboardUI = FindAnyObjectByType<LeaderboardUI>();
-        if (leaderboardUI != null)
-        {
-            leaderboardUI.leaderBoard.SetActive(true);
-            leaderboardUI. leaderboardText.text = "";
-           
-           
-        }
+       
+          leaderBoard.SetActive(true);
+          
+        
 
     }
     public void CloseLeaderboard()
     {
-        LeaderboardUI leaderboardUI = FindAnyObjectByType<LeaderboardUI>();
-        if (leaderboardUI != null)
-        {
-            leaderboardUI.leaderBoard.SetActive(false);
-        }
+       leaderBoard.SetActive(false);
+        
 
 
     }
-
+    //mo panel quit
+    public void OpenPanelQuit()
+    {
+        panelQuitGame.SetActive(true);
+    }
+    public void ClosePanelQuit()
+    {
+        panelQuitGame.SetActive(false);
+    }
     //thoát game
     public void OnExitButton()
     {
@@ -67,5 +71,13 @@ public class MainButton : MonoBehaviour
     }
     public void ClosePanelNewUser() { 
         panelNewUser.SetActive(false);
+    }
+
+    //setting
+    public void OpenPanelSetting() {
+        panelSetting.SetActive(true);
+    }
+    public void ClosePanelSetting() { 
+        panelSetting.SetActive(false);
     }
 }
