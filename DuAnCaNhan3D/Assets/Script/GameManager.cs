@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject playlistUI;
     public GameObject newUserUI;
     public GameObject levelUI;
+    public GameObject howToplayUI;
+    public GameObject leaderBoardUI;
+
 
 
     //  New User
@@ -15,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject userItemPrefab;
     public Transform contentParrent;
 
+    
 
     // UI trên màn hình chính
     public TMP_Text welcomeTxt;
@@ -22,12 +26,30 @@ public class GameManager : MonoBehaviour
     public TMP_Text scoreTxt;
 
     public UserData currentUser;
+
+
+    //gameobject
+    public GameObject quitPanel;
+
+    //leaderboard
+    public Transform leaderBoardContent;
+    public GameObject leaderBoardItemPrefab;
+
+    //Setting
+    public GameObject settingUI;
+
+
+    // Start is called before the first frame update
     void Start()
     {
-
+        // Ẩn tất cả UI khi bắt đầu
+        quitPanel.SetActive(false);
+        howToplayUI.SetActive(false);
         newUserUI.SetActive(false);
         playlistUI.SetActive(false);
         levelUI.SetActive(false);
+        leaderBoardUI.SetActive(false);
+        settingUI.SetActive(false);
         // Load user mới nhất khi vào game
         currentUser = SaveSystem.GetLastUser();
         if (currentUser != null)
@@ -60,12 +82,7 @@ public class GameManager : MonoBehaviour
         scoreTxt.text = user.score.ToString();
     }
     //QUIT GAME
-    public void QuitGame()
-    {
-        Application.Quit();
-        Debug.Log("Quit Game!");
-    }
-
+  
     // Playlist UI
     public void OpenPlaylist()
     {
@@ -126,7 +143,9 @@ public class GameManager : MonoBehaviour
                 GameObject newUserItem = Instantiate(userItemPrefab, contentParrent);
                 newUserItem.GetComponent<UserSlot>().SetName(inputName);
                 Debug.Log(newUserItem);
+
                 CloseNewUser();
+                usernameInput.text = "";
             }
             else
             {
@@ -148,5 +167,64 @@ public class GameManager : MonoBehaviour
     {
         levelUI.SetActive(false);
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quit Game!");
+    }
+    public void OpenQuitPanel()
+    {
+        quitPanel.SetActive(true);
+    }
+    public void CloseQuitPanel()
+    {
+        quitPanel.SetActive(false);
+    }
+    public void OpenHowToPlay()
+    {
+        howToplayUI.SetActive(true);
+    }
+    public void CloseHowToPlay()
+    {
+        howToplayUI.SetActive(false);
+    }
 
+    public void OpenLeaderBoard()
+    {
+        leaderBoardUI.SetActive(true);
+        //load user
+        // Clear item cũ
+        foreach (Transform child in leaderBoardContent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Load users và sort theo score giảm dần
+        List<UserData> users = SaveSystem.GetAllUsers();
+        users.Sort((a, b) => b.score.CompareTo(a.score));
+
+        int rank = 1;
+        foreach (UserData user in users)
+        {
+            GameObject slotObj = Instantiate(leaderBoardItemPrefab, leaderBoardContent);
+            LeaderBoardSlot slot = slotObj.GetComponent<LeaderBoardSlot>();
+            slot.Setup(rank, user.username, user.score);
+            rank++;
+        }
+
+
+    }
+    public void CloseLeaderBoard()
+    {
+        leaderBoardUI.SetActive(false);
+    }
+    public void OpenSetting()
+    {
+        settingUI.SetActive(true);
+    }
+
+    public void CloseSetting()
+    {
+        settingUI.SetActive(false);
+    }
 }

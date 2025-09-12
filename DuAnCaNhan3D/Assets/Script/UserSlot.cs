@@ -4,6 +4,8 @@ using UnityEngine;
 public class UserSlot : MonoBehaviour
 {
     public TMP_Text usernameText;
+    public GameObject deletePanel;
+    
     public void SetName(string name)
     {
         usernameText.text = name;
@@ -26,6 +28,14 @@ public class UserSlot : MonoBehaviour
     {
         SaveSystem.DeleteUser(usernameText.text);
         Destroy(gameObject);
+    }
+    public void OpenDeletePanel()
+    {
+        deletePanel.SetActive(true);
+    }
+    public void CloseDeletePanel()
+    {
+        deletePanel.SetActive(false);
     }
 }
 
