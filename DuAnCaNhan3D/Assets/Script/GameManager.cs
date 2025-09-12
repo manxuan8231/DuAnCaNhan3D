@@ -37,7 +37,20 @@ public class GameManager : MonoBehaviour
 
     //Setting
     public GameObject settingUI;
+    public static GameManager instance;
 
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // giữ lại khi đổi scene
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -226,5 +239,20 @@ public class GameManager : MonoBehaviour
     public void CloseSetting()
     {
         settingUI.SetActive(false);
+    }
+    //start game
+    public void StartGame(string sceneName)
+    {
+        if (currentUser != null)
+        {
+            currentUser.lastScence = sceneName;
+            SaveSystem.Save(currentUser);
+            Debug.Log("Lưu cảnh hiện tại: " + sceneName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Chưa chọn user!");
+        }
     }
 }
