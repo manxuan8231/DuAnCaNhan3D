@@ -70,4 +70,30 @@ public static class SaveSystem
         UserDatabase db = LoadDatabase();
         return db.users;
     }
+    public static UserData GetLastUser()
+    {
+        UserDatabase db = LoadDatabase();
+        if (db.users.Count > 0)
+        {
+            return db.users[db.users.Count - 1]; // user mới nhất nằm cuối
+        }
+        return null;
+    }
+    //DELTE USER
+    public static void DeleteUser(string username)
+    {
+        UserDatabase db = LoadDatabase();
+        int index = db.users.FindIndex(u => u.username == username);
+        if (index >= 0)
+        {
+            db.users.RemoveAt(index);
+            SaveDatabase(db);
+            Debug.Log($"User {username} đã bị xóa.");
+        }
+        else
+        {
+            Debug.LogWarning($"Không tìm thấy user {username} để xóa.");
+        }
+    }
+
 }
