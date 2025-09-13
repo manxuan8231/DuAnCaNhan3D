@@ -7,7 +7,9 @@ public class MainButton : MonoBehaviour
     public GameObject panelUser;
     public GameObject panelNewUser;
     public GameObject panelQuitGame; 
-    public GameObject panelSetting;
+    public GameObject panelSetting; 
+    public GameObject panelLevel;
+    public GameObject panelHowToPlay;
     public void OnStartButton()//bắt đầu chơi game
     {
         if (GameManager.Instance.currentUser != null)
@@ -79,5 +81,25 @@ public class MainButton : MonoBehaviour
     }
     public void ClosePanelSetting() { 
         panelSetting.SetActive(false);
+    }
+
+    //dong mo bang level
+    public void OpenPanelLevel()
+    {
+        panelLevel.SetActive(true);
+    }
+    public void ClosePanelLevel()
+    {
+        panelLevel.SetActive(false);
+    }
+
+    //how to play
+    public void OpenPanelHowToPlay()
+    {
+        panelHowToPlay.SetActive(true);
+    }
+    public void ClosePanelHowToPlay()
+    {
+        panelHowToPlay.SetActive(false);
     }
 }

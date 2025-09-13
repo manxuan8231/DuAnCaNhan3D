@@ -23,7 +23,7 @@ public class Status : MonoBehaviour
         {
             UserData user = GameManager.Instance.currentUser;
             usernameText.text = "Name: " + user.username;
-            scoreText.text = "Score: " + user.score;
+            scoreText.text = "" + user.score;
             levelText.text = "Level: " + user.level;
         }
     }

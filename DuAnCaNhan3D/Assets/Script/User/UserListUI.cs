@@ -31,8 +31,9 @@ public class UserListUI : MonoBehaviour
                 }
             }
         }
+      
 
-        UpdateCurrentUserText(); // Cập nhật khi mới vào
+            UpdateCurrentUserText(); // Cập nhật khi mới vào
     }
 
 
@@ -103,7 +104,7 @@ public class UserListUI : MonoBehaviour
 
     }
 
-    private void UpdateCurrentUserText()
+    public void UpdateCurrentUserText()
     {
         if (GameManager.Instance.currentUser != null)
         {
@@ -113,7 +114,7 @@ public class UserListUI : MonoBehaviour
         }
         else
         {
-            textCurrent.text = "Chưa chọn user";
+            textCurrent.text = "No User";
         }
     }
 }
